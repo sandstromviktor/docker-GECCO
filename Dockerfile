@@ -12,12 +12,15 @@ RUN apt-get install -y --no-install-recommends git \
     vim \
     && apt-get purge -y --auto-remove
 
+COPY requirements.txt requirements.txt
 
-WORKDIR $HOME
 RUN git clone https://github.com/zellerlab/GECCO.git
-RUN pip install gecco-tool
+RUN pip install -r requirements.txt --no-cache-dir
 RUN chown -R $USER:$USER $HOME 
+RUN rm -rf /var/lib/apt/lists/* requirements.txt
 
-RUN rm -rf /var/lib/apt/lists/*
+COPY app.py $HOME/app.py
 USER $USER
-EXPOSE 8000
+EXPOSE 8080
+WORKDIR $HOME
+CMD gradio app.py
