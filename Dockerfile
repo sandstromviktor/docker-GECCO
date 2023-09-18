@@ -10,6 +10,7 @@ RUN apt-get update -yq \
 
 RUN apt-get install -y --no-install-recommends git \
     vim \
+    zip \
     && apt-get purge -y --auto-remove
 
 COPY requirements.txt requirements.txt
