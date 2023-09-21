@@ -21,6 +21,7 @@ RUN chown -R $USER:$USER $HOME
 RUN rm -rf /var/lib/apt/lists/* requirements.txt
 
 COPY app.py $HOME/app.py
+COPY static/* $HOME/static/
 USER $USER
 EXPOSE 8080
 WORKDIR $HOME
