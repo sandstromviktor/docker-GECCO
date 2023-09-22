@@ -15,10 +15,10 @@ RUN apt-get install -y --no-install-recommends git \
 
 COPY requirements.txt requirements.txt
 
-RUN git clone https://github.com/zellerlab/GECCO.git
-RUN pip install -r requirements.txt --no-cache-dir
-RUN chown -R $USER:$USER $HOME 
-RUN rm -rf /var/lib/apt/lists/* requirements.txt
+RUN git clone https://github.com/zellerlab/GECCO.git \
+    && pip install -r requirements.txt --no-cache-dir \
+    && chown -R $USER:$USER $HOME \
+    && rm -rf /var/lib/apt/lists/* requirements.txt
 
 COPY app.py $HOME/app.py
 COPY static/* $HOME/static/
